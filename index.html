@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Prediction</title>
+</head>
+<body>
+    <div>
+        <h1>Sign Language Prediction</h1>
+        <video id="video" width="640" height="480" autoplay></video>
+        <p>Predicted Label: <span id="predicted-label"></span></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.12.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose@0.10.0/dist/handpose.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose@0.10.0/dist/handpose.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/knn-classifier@1.0.1/dist/knn-classifier.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.0.4/dist/mobilenet.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/tfjs@3.12.0/dist/tf.min.js"></script>
+
+    <script type="text/javascript">
+        const video = document.getElementById("video");
+        const predictedLabel = document.getElementById("predicted-label");
+
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function (err0r) {
+                    console.log("Something went wrong!");
+                });
+        }
+
+        async function main() {
+            const classifier = await knnClassifier.create();
+            const model = await mobilenet.load();
+
+            const webcam = await tf.data.webcam(video);
+
+            while (true) {
+                const img = await webcam.capture();
+                const result = await model.classify(img);
+                const logits = tf.tensor(result);
+                const prediction = await classifier.predictClass(logits);
+                predictedLabel.innerHTML = prediction.label;
+
+                img.dispose();
+                await tf.nextFrame();
+            }
+        }
+
+        main();
+    </script>
+</body>
+</html>
