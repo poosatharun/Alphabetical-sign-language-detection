@@ -56,3 +56,5 @@ Next, run the `Train_the_Model.py` script. It will train a model and save the mo
 Run the `testing.py` script to test the trained model.
 
 
+![Image_1681659560 7469316](https://github.com/poosatharun/Alphabetical-sign-language-detection/assets/107975821/26f1a280-612a-4d3b-97ab-9e360209422e)
+
