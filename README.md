@@ -2,6 +2,16 @@
 
 The Alphabetical Sign Language Detection project aims to create a system capable of recognizing and interpreting alphabetical signs in sign language using the Python programming language. Sign language is a visual language that relies on gestures, hand movements, and facial expressions to convey meaning.
 
+## Frameworks Used
+
+This project utilizes the following frameworks:
+
+- **TensorFlow**: TensorFlow is an open-source machine learning framework developed by Google.
+- **OpenCV**: OpenCV is an open-source computer vision and machine learning software library.
+- **Scikit-learn**: Scikit-learn is a simple and efficient tools for predictive data analysis.
+
+Make sure to install these frameworks by following the installation instructions provided in the [Getting Started](#getting-started) section before running the project.
+
 ## Getting Started
 
 ### 1. Clone the Repository
